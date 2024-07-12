@@ -1,3 +1,4 @@
+from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 
 from pages.base_page import BasePage
@@ -10,7 +11,7 @@ class CarturestiSearchPage(BasePage):
 
     SEARCH_INPUT_SELECTOR = (By.ID, "search-input")
     TITLE_SELECTOR = (By.CSS_SELECTOR, "h5.md-title")
-    MAGNIFIER_SELECTOR = (By.CSS_SELECTOR, "div.search-container > i")
+    MAGNIFIER_SELECTOR = (By.CSS_SELECTOR, 'div.search-container[role="button"]')
     # when you are on the page 10, rest of the elements for page number have @class='ng-scope'
     # this is why, the current page element is the only one in DOM that has @class='ng-scope active'
     CURRENT_PAGE_SELECTOR = (By.XPATH, "//li[@data-ng-repeat='page in pager.pages' and @class='ng-scope active']")
@@ -32,10 +33,13 @@ class CarturestiSearchPage(BasePage):
         self.driver.get(URL)
 
     def click_on_search_button(self):
+        # I take click method from BasePage
+        # click method accept a tuple (tuplu) -> see base_page.py
         self.click(self.SEARCH_INPUT_SELECTOR)
 
     def click_on_magnifier_button(self):
-        self.click(self.MAGNIFIER_SELECTOR)
+        # self.click(self.MAGNIFIER_SELECTOR)
+        self.driver.find_element(*self.SEARCH_INPUT_SELECTOR).send_keys(Keys.ENTER)
 
     def type_anything_on_search(self, text_to_search):
         self.type(self.SEARCH_INPUT_SELECTOR, text_to_search)

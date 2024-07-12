@@ -22,4 +22,4 @@ def step_impl(context):
 
 @then('The book with the title "{bookTitle}" should be visible')
 def step_impl(context, bookTitle):
-    assert bookTitle in context.carturesti_search.get_title_text()
+    assert bookTitle in context.carturesti_search.get_title_text(), f"error:expected title:{bookTitle},actual title:{context.carturesti_search.get_title_text()}"

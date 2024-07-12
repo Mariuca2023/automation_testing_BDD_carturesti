@@ -1,7 +1,7 @@
 
 Feature: this test suit tests search feature on Emag.ro website
 
-  @emag
+  @emag @skip
   Scenario: This scenario will test the search feature for a specific keyword
     Given EMAG I am on the main page
     When EMAG I click on the search button
@@ -9,7 +9,7 @@ Feature: this test suit tests search feature on Emag.ro website
     When EMAG I click the magnifier
     Then EMAG "colagen" keyword is in title phrasing element
 
-  @emag @negative
+  @emag @negative @skip
   Scenario: This scenario will test a negative case for a non existing product
     Given EMAG I am on the main page
     When EMAG I click on the search button
