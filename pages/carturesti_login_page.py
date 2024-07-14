@@ -12,23 +12,39 @@ class CarturestiLoginPage(BasePage):
     LOGIN_BUTTON = (By.CSS_SELECTOR, 'form[id="modalLoginForm"] button[type="submit"]')
     FLASH_CONTAINER = (By.CLASS_NAME, "help-block")
     COOKIES_BUTTON = (By.XPATH, '//a[contains(text(),"Permite toate")]')
+    # UTILIZATOR_EXISTENT = (By.ID, "loginTrigger")
+    UTILIZATOR_EXISTENT = (By.CSS_SELECTOR, "button.activ")
 
     def navigate_to_page(self):
         self.driver.get(self.LOGIN_PAGE_URL)
         self.driver.find_element(*self.COOKIES_BUTTON).click()
 
+    def click_allow_cookies(self):
+        self.wait_for_element(self.COOKIES_BUTTON, 10).is_displayed()
+        self.click(self.COOKIES_BUTTON)
+
+    def click_login(self):
+        #self.wait_for_element(self.LOGIN_BUTTON, 10).is_displayed()
+        self.wait_for_element(self.LOGIN_BUTTON, 10).is_displayed()
+        self.click(self.LOGIN_BUTTON)
+
+    def click_utilizator(self):
+        self.wait_for_element(self.UTILIZATOR_EXISTENT, 10).is_displayed()
+        self.click(self.UTILIZATOR_EXISTENT)
+
     # this method puts the email
     def set_email(self, email):
         #self.driver.find_element(*self.EMAIL_INPUT).send_keys(email)
+        self.wait_for_element(self.EMAIL_INPUT, 10).is_displayed()
         self.type(self.EMAIL_INPUT, email)
 
     # this method puts the password
     def set_password(self, password):
         #self.driver.find_element(*self.PASSWORD_INPUT).send_keys(password)
+        self.wait_for_element(self.PASSWORD_INPUT, 10).is_displayed()
         self.type(self.PASSWORD_INPUT, password)
 
-    def click_login(self):
-        self.click(self.LOGIN_BUTTON)
+
 
     # this method checks if the banner is displayed
     # same element is used for both scenarios positive and negative

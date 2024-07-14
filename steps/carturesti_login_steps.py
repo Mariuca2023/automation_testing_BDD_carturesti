@@ -4,6 +4,17 @@ from behave import *
 def step_impl(context):
     context.carturesti_login.navigate_to_page()
 
+@when('CARTURESTI I click on "COOKIES_BUTTON"')
+def step_impl(context):
+    context.carturesti_login.click_allow_cookies()
+
+@when('CARTURESTI I click on the login button')
+def step_impl(context):
+    context.carturesti_login.click_login()
+@when('CARTURESTI I click on UTILIZATOR EXISTENT')
+def step_impl(context):
+    context.carturesti_login.click_utilizator()
+
 @when('CARTURESTI I insert an username "{username}"')
 def step_impl(context, username):
     #context.home_page....
@@ -13,9 +24,6 @@ def step_impl(context, username):
 def step_impl(context, password):
     context.carturesti_login.set_password(password)
 
-@when('CARTURESTI I click on the login button')
-def step_impl(context):
-    context.carturesti_login.click_login()
 
 @then('CARTURESTI The banner is displayed')
 def step_impl(context):
