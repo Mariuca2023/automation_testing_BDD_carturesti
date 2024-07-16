@@ -24,11 +24,18 @@ def step_impl(context, username):
 def step_impl(context, password):
     context.carturesti_login.set_password(password)
 
-
-@then('CARTURESTI The banner is displayed')
+@when('CARTURESTI I click on the AUTENTIFICARE button')
 def step_impl(context):
-    assert context.carturesti_login.is_message_displayed(), 'Banner is not displayed'
+    context.carturesti_login.click_autentificare()
 
-@then('CARTURESTI The message is "{message}"')
-def step_impl(context, message):
-    assert message in context.carturesti_login.get_message_text(), "Message is not the same"
+@then('CARTURESTI The message is displayed')
+def step_impl(context):
+    assert context.carturesti_login.is_message_displayed(), 'Message is not displayed'
+#
+# @then('CARTURESTI The message is "{message}"')
+# def step_impl(context, message):
+#     assert message in context.carturesti_login.get_message_text(), "Message is not the same"
+
+@then('CARTURESTI I am redirected to "{url}"')
+def step_impl(context, url):
+    context.carturesti_login.check_url(url)
